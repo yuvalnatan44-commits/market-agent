@@ -4,7 +4,9 @@ Routine מתוזמן (Scheduled Routine) שרץ כל יום ב-08:00 UTC, סור
 
 ## איפה מוגדר ה-Routine בפועל
 
-ה-Routine מוגדר כ-Trigger בפלטפורמת Claude Code on the web (לא כקוד בריפו) — session חדש ("fresh session") שנוצר כל יום ומריץ פרומפט עצמאי. הפרומפט המלא, כולל כל דרישות המקורות/ניתוח/פורמט, מוטמע ב-Trigger עצמו כך שכל הרצה עצמאית ואינה תלויה במצב הריפו.
+ה-Routine מוגדר כ-Trigger בפלטפורמת Claude Code on the web (לא כקוד בריפו), `trig_01BmgCknJ74WxbnZv318M1qM`, שרץ כל יום ב-08:00 UTC (`0 8 * * *`). הפרומפט המלא, כולל כל דרישות המקורות/ניתוח/פורמט, מוטמע ב-Trigger עצמו.
+
+**הערה טכנית**: ה-Trigger מוגדר לפעול על גבי אותו session שבו נוצר (mode "self-bind"), ולא כ-session חדש בכל הרצה. הסיבה: ליצירת session חדש בכל הרצה (`create_new_session_on_fire`) לא הייתה גישה אוטומטית ל-connector של Gmail בארגון הזה (`connectors parameter is not available for this organization`), ואילו ה-session הנוכחי כבר מחובר ל-Gmail. המשמעות: כל הרצה יומית ממשיכה את אותה שיחה (context מצטבר לאורך זמן, מה שגם מאפשר לסוכן להימנע מכפילויות בין דו"חות). אם Gmail יתנתק מה-session הזה בעתיד, יש ליצור מחדש את ה-Routine (מומלץ מה-UI של claude.ai/routines, שם ניתן לבחור connectors לכל trigger באופן מפורש).
 
 ## מקורות מידע
 
